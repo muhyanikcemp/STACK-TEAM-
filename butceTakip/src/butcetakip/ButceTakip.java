@@ -14,7 +14,9 @@ public class ButceTakip {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        LinkedList butcem = new LinkedList();
+butcem.insert(1, "Market Alışverişi", 1500.50);
+System.out.println("Sistem başarıyla çalıştı, harcama dosyaya eklendi!");
     }
     
 }
