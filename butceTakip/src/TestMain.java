@@ -16,5 +16,6 @@ public class TestMain {
         benimButcem.islemEkle(3,-4000, "25.10.2026", "Fatura", "Elektrik","Gider");
         benimButcem.islemEkle(4,-1000, "26.10.2026", "Eğlence", "Sİnema","Gider");
     }
+        
     
 }
