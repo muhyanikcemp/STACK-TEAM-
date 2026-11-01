@@ -92,7 +92,7 @@ public class LinkedList {
         //liste sonuna null olana kadar kategorileri tek tek gezmeye başlıyoruz
         while (current!=null){ 
             if (current.mevcutHarcama>current.aylikButce){//o anki kategorinin mevcut harcaması,belirlenen aylık bütçesinden büyük mü diye kontrol ediyoruz
-                System.out.println("Uyarı"+current.kategoriAdi+"kategorisi bütçesini aştınız!");
+                System.out.println("Uyarı"+ current.kategoriAdi+ "kategorisi bütçesini aştınız!");
             }
             current=current.next;// sıradaki kategoriye geçmek için current işaretçisini bir sonraki düğüme (next) kaydırıyoruz
         }
@@ -131,7 +131,7 @@ public class LinkedList {
                 }
                 current=current.next;
             }
-            lptr = current;
+            lprt = current;
         }while(degisken);
         System.out.println("Harcamalar tutarına göre büyükten küçüğe sıralandı!");
     }
