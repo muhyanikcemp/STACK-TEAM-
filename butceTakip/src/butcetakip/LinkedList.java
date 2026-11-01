@@ -92,7 +92,7 @@ public class LinkedList {
         //liste sonuna null olana kadar kategorileri tek tek gezmeye başlıyoruz
         while (current!=null){ 
             if (current.mevcutHarcama>current.aylikButce){//o anki kategorinin mevcut harcaması,belirlenen aylık bütçesinden büyük mü diye kontrol ediyoruz
-                System.out.println("Uyarı"+ current.kategoriAdi+ "kategorisi bütçesini aştınız!");
+                System.out.println("Uyarı: "+ current.kategoriAdi+ "kategorisi bütçesini aştınız!");
             }
             current=current.next;// sıradaki kategoriye geçmek için current işaretçisini bir sonraki düğüme (next) kaydırıyoruz
         }
@@ -134,6 +134,39 @@ public class LinkedList {
             lprt = current;
         }while(degisken);
         System.out.println("Harcamalar tutarına göre büyükten küçüğe sıralandı!");
+    }
+    public void kategoriyeGoreSorgula(String arananKategori){ // dışarıdan aranacak kelimeyi parametre olarak alan metot
+        Node current = head;//listeyi baştan sona kadar gezebilmek için head düğümünü current adında gecici değişkene kopyala
+        boolean bulundu = false; // eşleşen bir harcamayı takip etmek için bir değişken açıyoruz
+        
+        System.out.println("---" + arananKategori + " Kategorisindeki Harcamalar --- "); // kategorinin arandığını gösteren başlık
+        while (current != null){//listenin sonuna ulaşana kadar bu döngüyü döndür
+            
+            if (current.harcamaAdi != null && current.harcamaAdi.equalsIgnoreCase(arananKategori)){// aradığımız kategori adına eşitse (büyük küçük harflere takılmadan)
+                System.out.println( "ID: " + current.id + " | Harcama : "  + current.harcamaAdi + " | Tutar: " + current.tutar);
+                bulundu = true;// en az bir tane bulunduğu için true yap
+            }
+            current = current.next;// gezgini bir sonraki düğüme taşıyoruz 
+        }
+        if (bulundu == false){// eşleşme çıkmadıysa 
+            System.out.println("Bu kategoride harcama bulunamadı.");
+        }
+    }
+    public void butceAsanlariListele(){
+        KategoriNode current = kategoriHead;
+        boolean asanVarmi = false;
+        
+        System.out.println("---Bütçesini Aşan Kategoriler---");
+        while (current != null){//kategori listesini sonuna kadar dön
+            if(current.mevcutHarcama>current.aylikButce){
+                System.out.println("Kategori: " + current.kategoriAdi + "| Bütçe: " + current.aylikButce + "| Harcanan: " + current.mevcutHarcama);
+                asanVarmi= true; // aşım yapan bir şey bulunca  güncelle
+            }
+            current = current.next;// gezgin düğümümüzü bir sonrakine kaydır
+        }
+        if (!asanVarmi){
+            System.out.println("Bütçesini aşan herhangi bir kategori bulunmuyor");
+        }
     }
 }
 
