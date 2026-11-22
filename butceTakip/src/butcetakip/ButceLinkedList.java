@@ -140,4 +140,61 @@ private void dosyayaKaydet(){
             }
             System.out.println("-------------------\n");
         }
+        public void butceAsimKontrol(){
+            KategoriNode current=kategoriHead;
+            boolean asanVarmi=false;
+            
+            while(current!=null){
+                if(current.mevcutHarcama>current.aylikButce){
+                    System.out.println("Uyarı: " + current.kategoriAdi+ "kategori bütçesini aştınız!");
+                    asanVarmi=true;
+                }
+                current=current.next;
+            }
+            //eğer hiçbir kategori bütçesini aşmadıysa
+            if(asanVarmi==false){
+                System.out.println("Butcesini asan herhangi bir kategori bulunmuyor");
+            }
+        }
+        public void kategoriyeGoreSorgula(String arananKategori){
+            if(head==null){
+                System.out.println("Sistemde kayıtlı islem bulunamadı.");
+                return;
+            }
+            System.out.println("\n---'" + arananKategori +"'KATEGORİSİ ARAMA SONUÇLARI---");
+            IslemNode temp= head;
+            boolean bulundu =false;
+            
+            while(temp!=null){
+                if (temp.kategori.equalsIgnoreCase(arananKategori)){
+                    System.out.println("ID:" + temp.id + "| Tür:" +temp.islemTuru+ " | Tutar:" + temp.tutar + "TL | Tarih:" + temp.tarih + "| Açıklama:" + temp.aciklama);
+                    bulundu =true;
+                }
+                temp=temp.next;
+            }
+            if(bulundu==false){
+                System.out.println("Bu kategoride herhangi bir işlem bulunamadı");
+            }
+            System.out.println("-------------------------------------------\n");
+        }
+        public void islemGuncelle(int guncellenecekId,double yeniTutar,String yeniAciklama){
+            IslemNode temp=head;
+            boolean guncellendi=false;
+            
+            while(temp !=null){
+                if (temp.id == guncellenecekId){
+                    temp.tutar=yeniTutar;
+                    temp.aciklama=yeniAciklama;
+                    guncellendi=true;
+                    break;
+                }
+                temp =temp.next;
+            }
+            if(guncellendi){
+                this.bakiyeHesapla();
+                System.out.println(guncellenecekId + " numaralı islem basarıyla guncellendi");
+            }else{
+                System.out.println(guncellenecekId + " numaralı ID'ye sahip bir islem bulunamadı.");
+            }
+        }
 }
