@@ -34,7 +34,7 @@ public class AnaEkran  extends JFrame{
     }
     private void arayuzuHazirla(){
         setTitle("Kişisel Bütçe ve Harcama Takibi");
-        setSize(850,520);
+        setSize(850,520);   
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(10,10));
@@ -84,6 +84,7 @@ public class AnaEkran  extends JFrame{
         lblNetBakiye = new JLabel("Net Bakiye: 0.0 TL");
         lblNetBakiye.setFont(new Font("SansSerif", Font.BOLD,16));
         altIslemPaneli.add(lblNetBakiye, BorderLayout.WEST);
+        altIslemPaneli.add(new IslemKontrolPaneli(butcem, islemTablosu, tabloModeli, this::tabloyuVeBakiyeyiGuncelle), BorderLayout.EAST);
         add (altIslemPaneli, BorderLayout.SOUTH);
         
         btnEkle.addActionListener(e-> yeniIslemKaydet());
