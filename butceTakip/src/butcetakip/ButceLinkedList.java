@@ -140,17 +140,17 @@ private void dosyayaKaydet(){
             }
             System.out.println("-------------------\n");
         }
-        public void kategoriEkle(String kategoriAdi,double aylikButce){
-            if(aylikButce<0){
+        public void kategoriLimitBelirle(String kategoriAdi,double aylikButce){  //  kategorilerimizin sınırını kaydediyor 
+            if(aylikButce<0){ // butcemiz 0 dan küçükse returnden sonrasını çalıstrma 
                 System.out.println("butce negatif olamaz");
                 return;
             }
-            KategoriNode yeniKategori=new KategoriNode(kategoriAdi,aylikButce);
-            yeniKategori.next=kategoriHead;
-            kategoriHead=yeniKategori;
+            KategoriNode yeniKategori=new KategoriNode(kategoriAdi,aylikButce); // yeni düğüm oluşuyor
+            yeniKategori.next=kategoriHead; // listenin şuanki ilk düğümünü göstersin
+            kategoriHead=yeniKategori; // listenin başı artık yeni düğüm
             System.out.println(kategoriAdi + " kategorisi " + aylikButce + " TL bütçeye eklendi ");
         }
-        private void kategoriHarcamalariniHesapla(){
+        private void kategoriHarcamalariniHesapla(){ //gerçekte ne kadar harcadığını buluyor
             KategoriNode kat = kategoriHead;
             while(kat!=null){
                 kat.mevcutHarcama = 0;
@@ -171,7 +171,7 @@ private void dosyayaKaydet(){
                 islem=islem.next;
             }
         }
-        public void butceAsimKontrol(){
+        public void butceAsimKontrol(){ // kategorilimitBelirle ve kategoriharcamalarınıhesaplayı karşılaştırıp aşıldıysa uyarıyor
             this.kategoriHarcamalariniHesapla();
             KategoriNode current=kategoriHead;
             boolean asanVarmi=false;
