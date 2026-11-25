@@ -140,6 +140,16 @@ private void dosyayaKaydet(){
             }
             System.out.println("-------------------\n");
         }
+        public void kategoriEkle(String kategoriAdi,double aylikButce){
+            if(aylikButce<0){
+                System.out.println("butce negatif olamaz");
+                return;
+            }
+            KategoriNode yeniKategori=new KategoriNode(kategoriAdi,aylikButce);
+            yeniKategori.next=kategoriHead;
+            kategoriHead=yeniKategori;
+            System.out.println(kategoriAdi + " kategorisi " + aylikButce + " TL bütçeye eklendi ");
+        }
         public void butceAsimKontrol(){
             KategoriNode current=kategoriHead;
             boolean asanVarmi=false;
