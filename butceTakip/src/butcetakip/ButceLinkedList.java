@@ -146,7 +146,7 @@ private void dosyayaKaydet(){
             
             while(current!=null){
                 if(current.mevcutHarcama>current.aylikButce){
-                    System.out.println("Uyarı: " + current.kategoriAdi+ "kategori bütçesini aştınız!");
+                    System.out.println("Uyarı: " + current.kategoriAdi+ " kategori bütçesini aştınız!");
                     asanVarmi=true;
                 }
                 current=current.next;
@@ -161,7 +161,7 @@ private void dosyayaKaydet(){
                 System.out.println("Sistemde kayıtlı islem bulunamadı.");
                 return;
             }
-            System.out.println("\n---'" + arananKategori +"'KATEGORİSİ ARAMA SONUÇLARI---");
+            System.out.println("\n---'" + arananKategori +"' KATEGORİSİ ARAMA SONUÇLARI---");
             IslemNode temp= head;
             boolean bulundu =false;
             
@@ -178,6 +178,10 @@ private void dosyayaKaydet(){
             System.out.println("-------------------------------------------\n");
         }
         public void islemGuncelle(int guncellenecekId,double yeniTutar,String yeniAciklama){
+            if(yeniTutar<0){
+                System.out.println("Tutar negatif olamaz");
+                return;
+            }
             IslemNode temp=head;
             boolean guncellendi=false;
             
