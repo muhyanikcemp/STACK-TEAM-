@@ -191,6 +191,7 @@ private void dosyayaKaydet(){
                 temp =temp.next;
             }
             if(guncellendi){
+                this.dosyayaKaydet();
                 this.bakiyeHesapla();
                 System.out.println(guncellenecekId + " numaralı islem basarıyla guncellendi");
             }else{
