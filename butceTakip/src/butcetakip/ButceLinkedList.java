@@ -150,7 +150,29 @@ private void dosyayaKaydet(){
             kategoriHead=yeniKategori;
             System.out.println(kategoriAdi + " kategorisi " + aylikButce + " TL bütçeye eklendi ");
         }
+        private void kategoriHarcamalariniHesapla(){
+            KategoriNode kat = kategoriHead;
+            while(kat!=null){
+                kat.mevcutHarcama = 0;
+                kat=kat.next;
+            }
+            IslemNode islem =head;
+            while(islem!=null){
+                if(islem.islemTuru.equalsIgnoreCase("Gider")){
+                    kat = kategoriHead;
+                    while(kat!=null){
+                        if(kat.kategoriAdi.equalsIgnoreCase(islem.kategori)){
+                            kat.mevcutHarcama += islem.tutar;
+                            break;
+                        }
+                        kat =kat.next;
+                    }
+                }
+                islem=islem.next;
+            }
+        }
         public void butceAsimKontrol(){
+            this.kategoriHarcamalariniHesapla();
             KategoriNode current=kategoriHead;
             boolean asanVarmi=false;
             

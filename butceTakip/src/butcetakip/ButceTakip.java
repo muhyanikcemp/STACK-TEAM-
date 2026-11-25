@@ -22,6 +22,7 @@ butcem.listele();
 System.out.println("SIRALAMA YAPILIYOR");
 butcem.sirala();
 butcem.listele();
+butcem.kategoriEkle("Market", 1000);
 butcem.butceAsimKontrol();
 System.out.println("Sistem basariyla calisti, harcama dosyaya eklendi!");
     }
