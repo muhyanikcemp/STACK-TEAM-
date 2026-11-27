@@ -26,6 +26,7 @@ public class AnaEkran  extends JFrame{
     private JLabel lblNetBakiye;
     
     protected JPanel altIslemPaneli;
+    private KategoriButcePaneli kategoriPaneli;
     
     public AnaEkran(){
         butcem= new ButceLinkedList();
@@ -63,7 +64,7 @@ public class AnaEkran  extends JFrame{
         formPaneli.add(txtAciklama);
         formPaneli.add(btnEkle);
         
-        add(formPaneli, BorderLayout.NORTH);
+        
         
         
         String[] kolonlar = {"ID", "Tür", "Kategori", "Tutar(TL)", "Tarih", "Açıklama"};
@@ -75,7 +76,7 @@ public class AnaEkran  extends JFrame{
         };
         
         islemTablosu = new JTable(tabloModeli);
-        add(new JScrollPane(islemTablosu), BorderLayout.CENTER);
+        
         
         
         altIslemPaneli = new JPanel(new BorderLayout());
@@ -85,7 +86,19 @@ public class AnaEkran  extends JFrame{
         lblNetBakiye.setFont(new Font("SansSerif", Font.BOLD,16));
         altIslemPaneli.add(lblNetBakiye, BorderLayout.WEST);
         altIslemPaneli.add(new IslemKontrolPaneli(butcem, islemTablosu, tabloModeli, this::tabloyuVeBakiyeyiGuncelle), BorderLayout.EAST);
-        add (altIslemPaneli, BorderLayout.SOUTH);
+        
+        JPanel islemlerSekmesi = new JPanel(new BorderLayout(10,10));
+        islemlerSekmesi.add(formPaneli, BorderLayout.NORTH);
+        islemlerSekmesi.add(new JScrollPane(islemTablosu), BorderLayout.CENTER);
+        islemlerSekmesi.add(altIslemPaneli,BorderLayout.SOUTH);
+        
+        kategoriPaneli=new KategoriButcePaneli(butcem);
+        
+        JTabbedPane sekmeler= new JTabbedPane();
+        sekmeler.addTab("İşlemler ve Bakiye", islemlerSekmesi);
+        sekmeler.addTab("Kategori Bütçe Limitleri", kategoriPaneli);
+        
+        add(sekmeler,BorderLayout.CENTER);
         
         btnEkle.addActionListener(e-> yeniIslemKaydet());
     }
@@ -149,6 +162,9 @@ public class AnaEkran  extends JFrame{
       }
       double netBakiye= toplamGelir - toplamGider;
       lblNetBakiye.setText(String.format("Net Bakiye: %.2f TL", netBakiye));
+      if (kategoriPaneli != null){
+          kategoriPaneli.limitleriGuncelle();
+      }
       
   }
 public static void main(String[]args){

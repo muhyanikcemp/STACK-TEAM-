@@ -140,13 +140,45 @@ private void dosyayaKaydet(){
             }
             System.out.println("-------------------\n");
         }
-        public void butceAsimKontrol(){
+        public void kategoriLimitBelirle(String kategoriAdi,double aylikButce){  //  kategorilerimizin sınırını kaydediyor 
+            if(aylikButce<0){ // butcemiz 0 dan küçükse returnden sonrasını çalıstrma 
+                System.out.println("butce negatif olamaz");
+                return;
+            }
+            KategoriNode yeniKategori=new KategoriNode(kategoriAdi,aylikButce); // yeni düğüm oluşuyor
+            yeniKategori.next=kategoriHead; // listenin şuanki ilk düğümünü göstersin
+            kategoriHead=yeniKategori; // listenin başı artık yeni düğüm
+            System.out.println(kategoriAdi + " kategorisi " + aylikButce + " TL bütçeye eklendi ");
+        }
+        private void kategoriHarcamalariniHesapla(){ //gerçekte ne kadar harcadığını buluyor
+            KategoriNode kat = kategoriHead;
+            while(kat!=null){
+                kat.mevcutHarcama = 0;
+                kat=kat.next;
+            }
+            IslemNode islem =head;
+            while(islem!=null){
+                if(islem.islemTuru.equalsIgnoreCase("Gider")){
+                    kat = kategoriHead;
+                    while(kat!=null){
+                        if(kat.kategoriAdi.equalsIgnoreCase(islem.kategori)){
+                            kat.mevcutHarcama += islem.tutar;
+                            break;
+                        }
+                        kat =kat.next;
+                    }
+                }
+                islem=islem.next;
+            }
+        }
+        public void butceAsimKontrol(){ // kategorilimitBelirle ve kategoriharcamalarınıhesaplayı karşılaştırıp aşıldıysa uyarıyor
+            this.kategoriHarcamalariniHesapla();
             KategoriNode current=kategoriHead;
             boolean asanVarmi=false;
             
             while(current!=null){
                 if(current.mevcutHarcama>current.aylikButce){
-                    System.out.println("Uyarı: " + current.kategoriAdi+ "kategori bütçesini aştınız!");
+                    System.out.println("Uyarı: " + current.kategoriAdi+ " kategori bütçesini aştınız!");
                     asanVarmi=true;
                 }
                 current=current.next;
@@ -161,7 +193,7 @@ private void dosyayaKaydet(){
                 System.out.println("Sistemde kayıtlı islem bulunamadı.");
                 return;
             }
-            System.out.println("\n---'" + arananKategori +"'KATEGORİSİ ARAMA SONUÇLARI---");
+            System.out.println("\n---'" + arananKategori +"' KATEGORİSİ ARAMA SONUÇLARI---");
             IslemNode temp= head;
             boolean bulundu =false;
             
@@ -178,6 +210,10 @@ private void dosyayaKaydet(){
             System.out.println("-------------------------------------------\n");
         }
         public void islemGuncelle(int guncellenecekId,double yeniTutar,String yeniAciklama){
+            if(yeniTutar<0){
+                System.out.println("Tutar negatif olamaz");
+                return;
+            }
             IslemNode temp=head;
             boolean guncellendi=false;
             
@@ -191,6 +227,7 @@ private void dosyayaKaydet(){
                 temp =temp.next;
             }
             if(guncellendi){
+                this.dosyayaKaydet();
                 this.bakiyeHesapla();
                 System.out.println(guncellenecekId + " numaralı islem basarıyla guncellendi");
             }else{
