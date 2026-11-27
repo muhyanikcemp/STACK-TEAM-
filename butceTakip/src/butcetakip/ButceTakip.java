@@ -18,6 +18,8 @@ public class ButceTakip {
         ButceLinkedList butcem = new ButceLinkedList();
 butcem.islemEkle(1, 1500.50, "23.10.2026","Market","Market Alışverişi","Gider");
 butcem.islemEkle(2,5000.00,"24.10.2026","Maas", "Ekim  Maası", "Gelir");
+butcem.islemEkle(1, 1500.50, "23.10.2026","Akaryakıt","Akaryakıt Alışverişi","Gider");
+butcem.islemEkle(2,5000.00,"24.10.2026","Burs", "Kasım  Bursu", "Gelir");
 butcem.listele();
 System.out.println("SIRALAMA YAPILIYOR");
 butcem.sirala();
